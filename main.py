@@ -6,7 +6,11 @@ def encrypt_caesar(text):
 
 
 def decode_caesar(text):
-    index = ord(max(t := {item: text.count(item) for item in text}, key=t.get)) - ord(' ')
+    dictionary = {item: text.count(item) for item in text}
+    index = 0
+    for key, value in dictionary.items():
+        if value == max(dictionary.values()):
+            index = ord(key) - ord(' ')
     new_text = ''
     for i in range(len(text)):
         new_text += chr((ord(text[i]) - index) % 65536)
